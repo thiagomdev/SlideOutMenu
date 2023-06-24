@@ -1,29 +1,34 @@
-//
-//  MenuViewController.swift
-//  SlideMenu
-//
-//  Created by Thiago on 24/06/23.
-//
-
 import UIKit
 
-class MenuViewController: UIViewController {
-
+final class MenuViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
+    }
+}
 
-        // Do any additional setup after loading the view.
+extension MenuViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: .default, reuseIdentifier: "identifier")
+        cell.selectionStyle = .none
+        cell.textLabel?.text = "Row: \(indexPath.row)"
+        return cell
     }
-    */
+}
 
+extension MenuViewController: ViewConfiguration {
+    func buildViewHierarchy() {
+    }
+    
+    func setupConstraints() {
+        
+    }
+    
+    func viewConfiguration() {
+        view.backgroundColor = .systemCyan
+    }
 }
