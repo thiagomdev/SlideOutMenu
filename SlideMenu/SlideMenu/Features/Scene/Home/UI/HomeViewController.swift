@@ -67,7 +67,7 @@ extension HomeViewController: ViewConfiguration {
         view.backgroundColor = .white
         makeNavigationButtons(
             rightTitle: "Open",
-            leftTitle: "Close",
+            leftTitle: "Hide",
             style: .plain,
             rightAction: #selector(handleRightButton),
             leftAction: #selector(handleLeftButton)
