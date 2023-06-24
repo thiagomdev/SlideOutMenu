@@ -21,7 +21,7 @@ extension HomeViewController {
 }
 
 extension HomeViewController {
-    private func makeNavigationButtons(
+    private func setupNavigationItems(
         rightTitle: String,
         leftTitle: String,
         style: UIBarButtonItem.Style,
@@ -65,7 +65,7 @@ extension HomeViewController: ViewConfiguration {
     func viewConfiguration() {
         navigationItem.title = "Home"
         view.backgroundColor = .white
-        makeNavigationButtons(
+        setupNavigationItems(
             rightTitle: "Open",
             leftTitle: "Hide",
             style: .plain,
