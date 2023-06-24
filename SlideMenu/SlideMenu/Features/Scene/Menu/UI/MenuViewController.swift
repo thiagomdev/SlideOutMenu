@@ -15,6 +15,7 @@ extension MenuViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "identifier")
         cell.selectionStyle = .none
+        cell.backgroundColor = .systemCyan
         cell.textLabel?.text = "Row: \(indexPath.row)"
         return cell
     }

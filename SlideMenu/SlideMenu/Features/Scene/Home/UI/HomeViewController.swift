@@ -2,10 +2,11 @@ import UIKit
 
 final class HomeViewController: UITableViewController {
     private lazy var mainWindow = UIApplication.shared.keyWindow
+    private let menuWidth: CGFloat = 250
     
-    private lazy var menuView: MenuViewController = {
+    private lazy var menuViewController: MenuViewController = {
         let menu = MenuViewController()
-        menu.view.frame = CGRect(x: 0, y: 0, width: view.frame.width - 160, height: view.frame.height)
+        menu.view.frame = CGRect(x: -menuWidth, y: 0, width: menuWidth, height: view.frame.height)
         return menu
     }()
     
@@ -17,7 +18,7 @@ final class HomeViewController: UITableViewController {
 
 extension HomeViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 10
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -52,13 +53,33 @@ extension HomeViewController {
     
     @objc
     private func handleRightButton() {
-        print("Tapping handleRightButton...")
-        mainWindow?.addSubview(menuView.view)
+        mainWindow?.addSubview(menuViewController.view)
+        addChild(menuViewController)
+        view.layoutIfNeeded()
+        UIView.animate(
+            withDuration: 0.8,
+            delay: .zero,
+            usingSpringWithDamping: 1,
+            initialSpringVelocity: 1,
+            options: .curveEaseOut
+        ) {
+            self.menuViewController.view.transform = CGAffineTransform(translationX: self.menuWidth, y: 0)
+            self.view.layoutIfNeeded()
+        }
     }
     
     @objc
     private func handleLeftButton() {
-        print("Tapping handleLeftButton...")
+        UIView.animate(
+            withDuration: 0.8,
+            delay: .zero,
+            usingSpringWithDamping: 1,
+            initialSpringVelocity: 1,
+            options: .curveEaseOut
+        ) {
+            self.menuViewController.view.transform = .identity
+            self.view.layoutIfNeeded()
+        }
     }
 }
 
