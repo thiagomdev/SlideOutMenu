@@ -1,8 +1,17 @@
-//
-//  ViewConfiguration.swift
-//  SlideMenu
-//
-//  Created by Thiago on 24/06/23.
-//
-
 import Foundation
+
+protocol ViewConfiguration {
+    func buildViewHierarchy()
+    func setupConstraints()
+    func viewConfiguration()
+}
+
+extension ViewConfiguration {
+    func setup() {
+        buildViewHierarchy()
+        setupConstraints()
+        viewConfiguration()
+    }
+    
+    func viewConfiguration() {  }
+}
