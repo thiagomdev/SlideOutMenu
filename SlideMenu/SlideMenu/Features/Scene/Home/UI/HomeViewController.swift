@@ -1,6 +1,14 @@
 import UIKit
 
 final class HomeViewController: UITableViewController {
+    private lazy var mainWindow = UIApplication.shared.keyWindow
+    
+    private lazy var menuView: MenuViewController = {
+        let menu = MenuViewController()
+        menu.view.frame = CGRect(x: 0, y: 0, width: view.frame.width - 160, height: view.frame.height)
+        return menu
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -45,6 +53,7 @@ extension HomeViewController {
     @objc
     private func handleRightButton() {
         print("Tapping handleRightButton...")
+        mainWindow?.addSubview(menuView.view)
     }
     
     @objc
