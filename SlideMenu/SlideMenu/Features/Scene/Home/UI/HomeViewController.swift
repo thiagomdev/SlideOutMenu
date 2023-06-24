@@ -2,7 +2,7 @@ import UIKit
 
 final class HomeViewController: UITableViewController {
     private lazy var mainWindow = UIApplication.shared.keyWindow
-    private let menuWidth: CGFloat = 250
+    private let menuWidth: CGFloat = 256
     
     private lazy var menuViewController: MenuViewController = {
         let menu = MenuViewController()
@@ -57,7 +57,7 @@ extension HomeViewController {
         addChild(menuViewController)
         view.layoutIfNeeded()
         UIView.animate(
-            withDuration: 0.8,
+            withDuration: 0.9,
             delay: .zero,
             usingSpringWithDamping: 1,
             initialSpringVelocity: 1,
@@ -71,7 +71,7 @@ extension HomeViewController {
     @objc
     private func handleLeftButton() {
         UIView.animate(
-            withDuration: 0.8,
+            withDuration: 0.9,
             delay: .zero,
             usingSpringWithDamping: 1,
             initialSpringVelocity: 1,
