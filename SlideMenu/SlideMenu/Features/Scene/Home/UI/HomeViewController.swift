@@ -3,7 +3,7 @@ import UIKit
 final class HomeViewController: UITableViewController {
     private lazy var mainWindow = UIApplication.shared.keyWindow
     
-    private lazy var menuView: MenuViewController = {
+    private lazy var menuViewController: MenuViewController = {
         let menu = MenuViewController()
         return menu
     }()
@@ -52,14 +52,15 @@ extension HomeViewController {
     @objc
     private func handleRightButton() {
         print("Tapping handleRightButton...")
-        mainWindow?.addSubview(menuView.view)
-        menuView.view.frame = CGRect(x: 0, y: 0, width: view.frame.width - 150, height: view.frame.height)
+        mainWindow?.addSubview(menuViewController.view)
+        addChild(menuViewController)
+        menuViewController.view.frame = CGRect(x: 0, y: 0, width: view.frame.width - 150, height: view.frame.height)
     }
     
     @objc
     private func handleLeftButton() {
         print("Tapping handleLeftButton...")
-        menuView.view.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+        menuViewController.view.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
     }
 }
 
