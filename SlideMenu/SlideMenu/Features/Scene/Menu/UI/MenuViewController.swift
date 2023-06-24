@@ -31,6 +31,5 @@ extension MenuViewController: ViewConfiguration {
     
     func viewConfiguration() {
         view.backgroundColor = .systemCyan
-        view.layer.cornerRadius = 10
     }
 }
