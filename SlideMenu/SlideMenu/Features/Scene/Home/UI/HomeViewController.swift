@@ -78,7 +78,7 @@ extension HomeViewController {
     
     private func perfomAnimations(by transform: CGAffineTransform) {
         UIView.animate(
-            withDuration: 0.9,
+            withDuration: 0.6,
             delay: .zero,
             usingSpringWithDamping: 1,
             initialSpringVelocity: 1,
