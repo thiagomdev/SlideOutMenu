@@ -188,7 +188,6 @@ extension HomeViewController: ViewConfiguration {
         registerCell()
         navigationItem.title = "Home"
         view.backgroundColor = .systemBackground
-        tableView.estimatedRowHeight = 60
         tableView.rowHeight = UITableView.automaticDimension
         
         setupNavigationItems(
