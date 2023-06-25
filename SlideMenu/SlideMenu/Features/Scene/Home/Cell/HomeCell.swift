@@ -1,23 +1,40 @@
-//
-//  HomeCell.swift
-//  SlideMenu
-//
-//  Created by Thiago on 25/06/23.
-//
-
 import UIKit
 
-class HomeCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+final class HomeCell: UITableViewCell {
+    static let identifier: String = HomeCell.self.description()
+    
+    private lazy var personImageView: UIImageView = {
+        let imgView = UIImageView()
+        imgView.contentMode = .scaleAspectFit
+        imgView.clipsToBounds = true
+        imgView.image = UIImage(systemName: "person")
+        imgView.translatesAutoresizingMaskIntoConstraints = false
+        return imgView
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setup()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
+}
 
+extension HomeCell: ViewConfiguration {
+    func buildViewHierarchy() {
+        contentView.addSubview(personImageView)
+    }
+    
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            personImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            personImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+        ])
+    }
+    
+    func viewConfiguration() {
+        backgroundColor = .systemBackground
+    }
 }
