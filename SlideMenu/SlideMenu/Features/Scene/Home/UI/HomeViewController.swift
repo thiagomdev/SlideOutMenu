@@ -29,14 +29,20 @@ final class HomeViewController: UITableViewController {
 // MARK: - UITableViewController Protocols
 extension HomeViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 3
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "identifier")
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: HomeCell.identifier,
+            for: indexPath) as? HomeCell else { return UITableViewCell() }
         cell.selectionStyle = .none
-        cell.textLabel?.text = "Row: \(indexPath.row)"
+//        cell.textLabel?.text = "Row: \(indexPath.row)"
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
 }
 
@@ -139,6 +145,11 @@ extension HomeViewController {
         //TODO: RESOLVE A BUG REGARING BLACK WINDOW SOMETIMES
 //        navigationController?.view.transform = transform
     }
+    
+    private func registerCell() {
+//        tableView.separatorStyle = .none
+        tableView.register(HomeCell.self, forCellReuseIdentifier: HomeCell.identifier)
+    }
 }
 
 // MARK: - HomeViewController Selector Methods
@@ -174,8 +185,12 @@ extension HomeViewController: ViewConfiguration {
     }
     
     func viewConfiguration() {
+        registerCell()
         navigationItem.title = "Home"
         view.backgroundColor = .systemBackground
+        tableView.estimatedRowHeight = 60
+        tableView.rowHeight = UITableView.automaticDimension
+        
         setupNavigationItems(
             rightTitle: "Open",
             leftTitle: "Hide",
