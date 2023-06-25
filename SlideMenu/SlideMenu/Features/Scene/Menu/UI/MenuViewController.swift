@@ -19,6 +19,10 @@ extension MenuViewController {
         cell.textLabel?.text = "Row: \(indexPath.row)"
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
 }
 
 extension MenuViewController: ViewConfiguration {
@@ -30,6 +34,7 @@ extension MenuViewController: ViewConfiguration {
     }
     
     func viewConfiguration() {
+//        tableView.separatorStyle = .none
         view.backgroundColor = .systemCyan
     }
 }
