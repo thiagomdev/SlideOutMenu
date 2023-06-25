@@ -17,7 +17,6 @@ extension MenuViewController {
             withIdentifier: MenuCell.identifier,
             for: indexPath) as? MenuCell else { return UITableViewCell() }
         cell.selectionStyle = .none
-//        cell.textLabel?.text = "Row: \(indexPath.row)"
         return cell
     }
     
@@ -28,7 +27,6 @@ extension MenuViewController {
 
 extension MenuViewController {
     private func registerCell() {
-//        tableView.separatorStyle = .none
         tableView.register(MenuCell.self, forCellReuseIdentifier: MenuCell.identifier)
     }
 }
@@ -43,7 +41,6 @@ extension MenuViewController: ViewConfiguration {
     
     func viewConfiguration() {
         registerCell()
-//        tableView.separatorStyle = .none
         view.backgroundColor = .systemCyan
     }
 }
