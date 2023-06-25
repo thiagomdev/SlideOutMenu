@@ -4,6 +4,7 @@ final class HomeViewController: UITableViewController {
     // MARK: - Properties
     private let menuWidth: CGFloat = 230
     private var isMenuOpened: Bool = false
+    private let velocityOpenThreshold: CGFloat = 500
     
     // MARK: - Components
     private lazy var menuViewController: MenuViewController = {
@@ -20,6 +21,8 @@ final class HomeViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupMenuViewController()
+        //TODO: - RESOLVE A BUG REGARING BLACK WINDOW SOMETIMES TO performPanGesture()
+//        performPanGesture()
     }
 }
 
@@ -77,6 +80,8 @@ extension HomeViewController {
         ) {
             self.menuViewController.view.transform = transform
             self.view.transform = transform
+            //TODO: - RESOLVE A BUG REGARING BLACK WINDOW SOMETIMES
+//            self.navigationController?.view.transform = transform
         }
     }
     
@@ -85,15 +90,31 @@ extension HomeViewController {
         view.addGestureRecognizer(gesture)
     }
     
-    private func handleEnded(_ gesture: UIPanGestureRecognizer) {
+    private func handleEnded(_ panGesture: UIPanGestureRecognizer) {
+        setupHandlePanGesture(to: panGesture)
+    }
+    
+    private func setupHandlePanGesture(to gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
+        let velocity = gesture.velocity(in: view)
+        
         if isMenuOpened {
+            if  abs(velocity.x) > velocityOpenThreshold {
+                handleHideMenu()
+                return
+            }
+            
             if abs(translation.x) < menuWidth / 2 {
                 handleOpenMenu()
             } else {
                 handleHideMenu()
             }
         } else {
+            if velocity.x > velocityOpenThreshold {
+                handleOpenMenu()
+                return
+            }
+            
             if translation.x < menuWidth / 2 {
                 handleHideMenu()
             } else {
@@ -114,6 +135,9 @@ extension HomeViewController {
         let transform = CGAffineTransform(translationX: translationX, y: 0)
         menuViewController.view.transform = transform
         view.transform = transform
+        
+        //TODO: RESOLVE A BUG REGARING BLACK WINDOW SOMETIMES
+//        navigationController?.view.transform = transform
     }
 }
 
